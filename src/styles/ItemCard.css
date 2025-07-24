@@ -1,5 +1,9 @@
 .plant-list {
   width: 300px;
-  height: 400px;
+  height: 450px;
   background-color: aqua;
+}
+.card img {
+  width: 250px;
+  max-height: 300px;
 }
