@@ -1,5 +1,6 @@
 "use client";
 import { useCart } from "../../context/CartContext";
+import Image from "next/image";
 
 export default function ItemCard({
   className,
@@ -17,7 +18,7 @@ export default function ItemCard({
   return (
     <div className={className}>
       <h3>{name}</h3>
-      <img src={img} alt={name} className="card-image" />
+      <Image src={img} alt={name} />
       <p>{desc}</p>
       <span>
         {prize} {currency}
