@@ -26,7 +26,6 @@ export function UserProvider({ children }) {
   useEffect(() => {
     const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
 
-    // Dodaj admina, jeśli go nie ma
     const hasAdmin = storedUsers.some((u) => u.email === "admin@ms.pl");
     if (!hasAdmin) {
       storedUsers.push({

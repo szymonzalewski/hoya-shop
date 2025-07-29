@@ -13,7 +13,7 @@ export default function RegisterPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     register(email, password);
-    router.push("/"); // lub do /login
+    router.push("/");
   };
 
   return (

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Main from "../../components/Main";
 import ItemCard from "../../../app/components/ItemCard";
 
-import { usePlants } from "../../../context/PlantContext"; // <- dodaj to
+import { usePlants } from "../../../context/PlantContext";
 
 export default function AdminDashboard() {
   const { user } = useUser();
@@ -54,7 +54,6 @@ export default function AdminDashboard() {
       addPlant(newPlant);
     }
 
-    // Wyczyść formularz
     setName("");
     setDesc("");
     setImg("");

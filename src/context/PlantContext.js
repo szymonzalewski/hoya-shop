@@ -6,13 +6,11 @@ const PlantContext = createContext();
 export function PlantProvider({ children }) {
   const [plants, setPlants] = useState([]);
 
-  // 👉 Odczyt z localStorage przy pierwszym renderze
   useEffect(() => {
     const stored = localStorage.getItem("plants");
     if (stored) {
       setPlants(JSON.parse(stored));
     } else {
-      // jeśli brak danych – ustaw domyślne
       setPlants([
         {
           name: "Hoja carnosa",
@@ -34,7 +32,6 @@ export function PlantProvider({ children }) {
     }
   }, []);
 
-  // 👉 Zapisuj do localStorage za każdym razem, gdy plants się zmienią
   useEffect(() => {
     localStorage.setItem("plants", JSON.stringify(plants));
   }, [plants]);
@@ -51,6 +48,7 @@ export function PlantProvider({ children }) {
     setPlants((prevPlants) =>
       prevPlants.map((plant, i) => (i === indexToEdit ? updatedPlant : plant))
     );
+    alert("Zmieniono roślinę:", updatedPlant);
   };
 
   return (

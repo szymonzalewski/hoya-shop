@@ -15,7 +15,6 @@ export default function LoginPage() {
     e.preventDefault();
     login(email, password);
 
-    // Przekieruj po zalogowaniu (np. admin → dashboard)
     if (email === "admin@ms.pl") {
       router.push("/admin/dashboard");
     } else {
