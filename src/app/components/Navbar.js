@@ -21,7 +21,13 @@ export default function Navbar() {
           <Link href="/about">O nas</Link>
         </li>
         <li>
-          <Link href="/logging">Logowanie</Link>
+          <Link href="/login">Logowanie</Link>
+        </li>
+        <li>
+          <Link href="/register">Rejestracja</Link>
+        </li>
+        <li>
+          <Link href="/user">Strona {user ? user.email : "Gościu"}</Link>
         </li>
         <li>
           <Link href="/basket">Koszyk {cart.length}</Link>

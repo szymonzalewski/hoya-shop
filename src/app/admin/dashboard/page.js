@@ -10,6 +10,7 @@ import { usePlants } from "../../../context/PlantContext"; // <- dodaj to
 export default function AdminDashboard() {
   const { user } = useUser();
   const router = useRouter();
+  const [editingIndex, setEditingIndex] = useState(null);
 
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
@@ -23,18 +24,42 @@ export default function AdminDashboard() {
     }
   }, [user, router]);
 
-  const { addPlant, plants } = usePlants();
+  const { addPlant, plants, removePlant, editPlant } = usePlants();
+
+  const startEditing = (index) => {
+    const plant = plants[index];
+    setName(plant.name);
+    setDesc(plant.desc);
+    setImg(plant.img);
+    setPrize(plant.prize);
+    setCurrency(plant.currency);
+    setEditingIndex(index);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addPlant({
+    const newPlant = {
       name,
       desc,
       img,
       prize,
       currency,
       basket: "Dodaj do koszyka",
-    });
+    };
+
+    if (editingIndex !== null) {
+      editPlant(editingIndex, newPlant);
+      setEditingIndex(null);
+    } else {
+      addPlant(newPlant);
+    }
+
+    // Wyczyść formularz
+    setName("");
+    setDesc("");
+    setImg("");
+    setPrize("");
+    setCurrency("PLN");
   };
 
   return (
@@ -96,16 +121,37 @@ export default function AdminDashboard() {
         }}
       >
         {plants.map((plant, index) => (
-          <ItemCard
-            key={index}
-            name={plant.name}
-            desc={plant.desc}
-            img={plant.img}
-            prize={plant.prize}
-            currency={plant.currency}
-            basket={plant.basket}
-            className="card" // lub własna klasa CSS
-          />
+          <div key={index} style={{ position: "relative" }}>
+            <ItemCard
+              name={plant.name}
+              desc={plant.desc}
+              img={plant.img}
+              prize={plant.prize}
+              currency={plant.currency}
+              basket={plant.basket}
+              className="card"
+            />
+            <button
+              onClick={() => {
+                if (confirm(`Czy napewno chcesz usunąć ${plant.name} hoję`))
+                  removePlant(index);
+              }}
+              style={{
+                position: "absolute",
+                top: 5,
+                right: 5,
+                background: "red",
+                color: "white",
+                border: "none",
+                padding: "4px 8px",
+                cursor: "pointer",
+                borderRadius: "4px",
+              }}
+            >
+              Usuń
+            </button>
+            <button onClick={() => startEditing(index)}>Edytuj</button>
+          </div>
         ))}
       </div>
     </Main>

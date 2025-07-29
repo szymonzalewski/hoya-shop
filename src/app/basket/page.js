@@ -4,7 +4,7 @@ import { useCart } from "../../context/CartContext";
 
 export default function Basket() {
   const { cart, clearCart } = useCart();
-  const total = cart.reduce((sum, item) => sum + item.prize, 0);
+  const total = cart.reduce((sum, item) => sum + Number(item.prize), 0);
 
   const handleConfirm = () => {
     if (cart.length === 0) {

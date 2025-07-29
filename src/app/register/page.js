@@ -4,40 +4,33 @@ import { useRouter } from "next/navigation";
 import { useUser } from "../../context/UserContext";
 import Main from "../components/Main";
 
-export default function LoginPage() {
+export default function RegisterPage() {
+  const { register } = useUser();
   const router = useRouter();
-  const { login } = useUser();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(email, password);
-
-    // Przekieruj po zalogowaniu (np. admin → dashboard)
-    if (email === "admin@ms.pl") {
-      router.push("/admin/dashboard");
-    } else {
-      router.push("/");
-    }
+    register(email, password);
+    router.push("/"); // lub do /login
   };
 
   return (
     <Main>
-      <h1>Logowanie</h1>
+      <h1>Rejestracja</h1>
       <form
         onSubmit={handleSubmit}
         style={{
           display: "flex",
           flexDirection: "column",
           gap: "1rem",
-          maxWidth: 300,
+          maxWidth: "300px",
         }}
       >
         <input
           type="email"
-          placeholder="Email"
+          placeholder="Adres e-mail"
           value={email}
           required
           onChange={(e) => setEmail(e.target.value)}
@@ -49,7 +42,7 @@ export default function LoginPage() {
           required
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Zaloguj</button>
+        <button type="submit">Zarejestruj się</button>
       </form>
     </Main>
   );

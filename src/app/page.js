@@ -9,11 +9,11 @@ export default function HomePage() {
   return (
     <Main>
       <h1>To nasze wspaniałe hoje</h1>
-      {plants.map((plant, index) => (
-        <div className="plant-list" key={index}>
-          <ItemCard {...plant} className="card" />
-        </div>
-      ))}
+      <div className="plant-list">
+        {plants.map((plant, index) => (
+          <ItemCard {...plant} className="card" key={index} />
+        ))}
+      </div>
     </Main>
   );
 }
