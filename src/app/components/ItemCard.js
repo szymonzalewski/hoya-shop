@@ -3,27 +3,25 @@ import { useCart } from "../../context/CartContext";
 import Image from "next/image";
 
 export default function ItemCard({
-  className,
   name,
   desc,
   img,
   prize,
   currency,
   basket,
+  className,
 }) {
-  const { addToCart } = useCart();
-  const handleAdd = () => {
-    addToCart({ name, desc, img, prize, currency });
-  };
   return (
     <div className={className}>
       <h3>{name}</h3>
-      <Image src={img} alt={name} />
+      <div className="image-wrapper">
+        <Image src={img} alt={name} fill style={{ objectFit: "cover" }} />
+      </div>
       <p>{desc}</p>
       <span>
         {prize} {currency}
       </span>
-      <button onClick={handleAdd}>{basket}</button>
+      <button>{basket}</button>
     </div>
   );
 }
